@@ -35,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sidieyel/wysiwyg-editor"
+    "url": "https://github.com/sidieyel/wysiwyg"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
