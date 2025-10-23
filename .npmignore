@@ -1,0 +1,9 @@
+src/
+public/
+index.html
+vite.config.ts
+tsconfig.json
+tsconfig.node.json
+.gitignore
+*.md
+!README.md
