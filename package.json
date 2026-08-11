@@ -1,5 +1,5 @@
 {
-  "name": "@sidi-eyel/wysiwyg-editor",
+  "name": "@sidieyel/wysiwyg-editor",
   "version": "1.0.0",
   "description": "A modern WYSIWYG editor built with React and Tiptap",
   "type": "module",
