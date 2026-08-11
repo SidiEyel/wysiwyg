@@ -8,24 +8,26 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
+      rollupTypes: true,
+      tsconfigPath: "./tsconfig.app.json",
+      exclude: ["src/App.tsx", "src/main.tsx"],
     }),
   ],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "WysiwygEditor",
-      formats: ["es", "umd"],
-      fileName: (format) => `wysiwyg-editor.${format}.js`,
+      formats: ["es", "cjs"],
+      fileName: (format) => (format === "es" ? "wysiwyg-editor.js" : "wysiwyg-editor.cjs"),
+      cssFileName: "style",
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "react/jsx-runtime": "react/jsx-runtime",
-        },
-      },
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "lucide-react",
+        /^@tiptap\//,
+      ],
     },
   },
 })

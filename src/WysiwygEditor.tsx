@@ -34,7 +34,7 @@ export interface WysiwygEditorProps {
 export function WysiwygEditor({
   content = "",
   onChange,
-  placeholder = "Start typing...",
+  placeholder: _placeholder = "Start typing...",
   className = "",
 }: WysiwygEditorProps) {
   const editor = useEditor({
