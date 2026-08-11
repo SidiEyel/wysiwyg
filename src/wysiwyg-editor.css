@@ -1,8 +1,25 @@
 .wysiwyg-editor-wrapper {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  /* Override these custom properties to theme the editor. */
+  --wysiwyg-bg: #ffffff;
+  --wysiwyg-text: #1f2937;
+  --wysiwyg-muted: #9ca3af;
+  --wysiwyg-border: #e5e7eb;
+  --wysiwyg-radius: 8px;
+  --wysiwyg-toolbar-bg: #f9fafb;
+  --wysiwyg-toolbar-text: #374151;
+  --wysiwyg-toolbar-hover-bg: #e5e7eb;
+  --wysiwyg-accent: #3b82f6;
+  --wysiwyg-accent-contrast: #ffffff;
+  --wysiwyg-code-bg: #f3f4f6;
+  --wysiwyg-code-text: #1f2937;
+  --wysiwyg-min-height: 200px;
+  --wysiwyg-max-height: none;
+
+  border: 1px solid var(--wysiwyg-border);
+  border-radius: var(--wysiwyg-radius);
   overflow: hidden;
-  background: white;
+  background: var(--wysiwyg-bg);
+  color: var(--wysiwyg-text);
 }
 
 .wysiwyg-toolbar {
@@ -10,8 +27,13 @@
   flex-wrap: wrap;
   gap: 4px;
   padding: 8px;
-  border-bottom: 1px solid #e5e7eb;
-  background: #f9fafb;
+  border-bottom: 1px solid var(--wysiwyg-border);
+  background: var(--wysiwyg-toolbar-bg);
+}
+
+.wysiwyg-toolbar-group {
+  display: flex;
+  gap: 4px;
 }
 
 .wysiwyg-toolbar button {
@@ -23,18 +45,18 @@
   border: none;
   border-radius: 4px;
   background: transparent;
-  color: #374151;
+  color: var(--wysiwyg-toolbar-text);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .wysiwyg-toolbar button:hover:not(:disabled) {
-  background: #e5e7eb;
+  background: var(--wysiwyg-toolbar-hover-bg);
 }
 
 .wysiwyg-toolbar button.is-active {
-  background: #3b82f6;
-  color: white;
+  background: var(--wysiwyg-accent);
+  color: var(--wysiwyg-accent-contrast);
 }
 
 .wysiwyg-toolbar button:disabled {
@@ -45,13 +67,15 @@
 .wysiwyg-separator {
   width: 1px;
   height: 24px;
-  background: #e5e7eb;
+  background: var(--wysiwyg-border);
   margin: 4px 4px;
 }
 
 .wysiwyg-editor-content {
   padding: 16px;
-  min-height: 200px;
+  min-height: var(--wysiwyg-min-height);
+  max-height: var(--wysiwyg-max-height);
+  overflow-y: auto;
   outline: none;
 }
 
@@ -59,7 +83,7 @@
   content: attr(data-placeholder);
   float: left;
   height: 0;
-  color: #9ca3af;
+  color: var(--wysiwyg-muted);
   pointer-events: none;
 }
 
@@ -71,6 +95,12 @@
 
 .wysiwyg-editor-content h2 {
   font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.75em 0;
+}
+
+.wysiwyg-editor-content h3 {
+  font-size: 1.25em;
   font-weight: bold;
   margin: 0.75em 0;
 }
@@ -89,16 +119,45 @@
   margin: 0.5em 0;
 }
 
+.wysiwyg-editor-content blockquote {
+  border-left: 3px solid var(--wysiwyg-border);
+  margin: 1em 0;
+  padding-left: 1em;
+  color: var(--wysiwyg-muted);
+}
+
+.wysiwyg-editor-content hr {
+  border: none;
+  border-top: 1px solid var(--wysiwyg-border);
+  margin: 1.5em 0;
+}
+
 .wysiwyg-editor-content code {
-  background: #f3f4f6;
+  background: var(--wysiwyg-code-bg);
+  color: var(--wysiwyg-code-text);
   padding: 2px 6px;
   border-radius: 4px;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.wysiwyg-editor-content pre {
+  background: var(--wysiwyg-code-bg);
+  color: var(--wysiwyg-code-text);
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 1em 0;
+  overflow-x: auto;
+}
+
+.wysiwyg-editor-content pre code {
+  background: none;
+  padding: 0;
   font-size: 0.9em;
 }
 
 .wysiwyg-editor-content a {
-  color: #3b82f6;
+  color: var(--wysiwyg-accent);
   text-decoration: underline;
 }
 
