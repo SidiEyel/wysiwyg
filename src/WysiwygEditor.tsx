@@ -1,10 +1,10 @@
 "use client"
 
+import { useEffect } from "react"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
-import Underline from "@tiptap/extension-underline"
 import TextAlign from "@tiptap/extension-text-align"
-import Link from "@tiptap/extension-link"
+import { Placeholder } from "@tiptap/extensions"
 import {
   Bold,
   Italic,
@@ -34,21 +34,28 @@ export interface WysiwygEditorProps {
 export function WysiwygEditor({
   content = "",
   onChange,
-  placeholder: _placeholder = "Start typing...",
+  placeholder = "Start typing...",
   className = "",
 }: WysiwygEditorProps) {
   const editor = useEditor({
     extensions: [
-      StarterKit,
-      Underline,
+      // Tiptap v3's StarterKit already includes Underline and Link, so they
+      // are configured here instead of being registered a second time.
+      StarterKit.configure({
+        link: {
+          openOnClick: false,
+        },
+      }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
-      Link.configure({
-        openOnClick: false,
+      Placeholder.configure({
+        placeholder,
       }),
     ],
     content,
+    // Required for SSR frameworks (e.g. Next.js): render on the client only.
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       onChange?.(editor.getHTML())
     },
@@ -58,6 +65,12 @@ export function WysiwygEditor({
       },
     },
   })
+
+  // Keep the editor in sync when the `content` prop changes from outside.
+  useEffect(() => {
+    if (!editor || content === editor.getHTML()) return
+    editor.commands.setContent(content, { emitUpdate: false })
+  }, [content, editor])
 
   if (!editor) {
     return null
@@ -69,11 +82,6 @@ export function WysiwygEditor({
       editor.chain().focus().setLink({ href: url }).run()
     }
   }
-  // EditorContent's types in some @tiptap/react versions may not include
-  // `immediatelyRender`. Create a props object and cast the extra prop to any
-  // so TypeScript doesn't complain while preserving runtime behavior.
-  const editorContentProps = { editor, ...( { immediatelyRender: false } as any ) }
-
   return (
     <div className={`wysiwyg-editor-wrapper ${className}`}>
       <div className="wysiwyg-toolbar">
@@ -209,7 +217,7 @@ export function WysiwygEditor({
         </button>
       </div>
 
-      <EditorContent {...editorContentProps} />
+      <EditorContent editor={editor} />
     </div>
   )
 }

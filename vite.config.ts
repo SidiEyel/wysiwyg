@@ -28,6 +28,10 @@ export default defineConfig({
         "lucide-react",
         /^@tiptap\//,
       ],
+      output: {
+        // Rollup strips module-level directives; re-add for Next.js consumers.
+        banner: '"use client";',
+      },
     },
   },
 })
