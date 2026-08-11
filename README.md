@@ -1,6 +1,6 @@
-# @sidi-eyel/wysiwyg-editor
+# @sidieyel/wysiwyg-editor
 
-[![npm version](https://img.shields.io/npm/v/%40sidi-eyel%2Fwysiwyg-editor)](https://www.npmjs.com/package/@sidi-eyel/wysiwyg-editor)
+[![npm version](https://img.shields.io/npm/v/%40sidieyel%2Fwysiwyg-editor)](https://www.npmjs.com/package/@sidieyel/wysiwyg-editor)
 [![CI](https://github.com/SidiEyel/wysiwyg/actions/workflows/ci.yml/badge.svg)](https://github.com/SidiEyel/wysiwyg/actions/workflows/ci.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
@@ -25,7 +25,7 @@ A modern, lightweight WYSIWYG editor component for React, built on [Tiptap](http
 ## Installation
 
 ```bash
-npm install @sidi-eyel/wysiwyg-editor
+npm install @sidieyel/wysiwyg-editor
 ```
 
 `react` and `react-dom` (18 or 19) are peer dependencies — you already have them in a React app.
@@ -34,8 +34,8 @@ npm install @sidi-eyel/wysiwyg-editor
 
 ```tsx
 import { useState } from "react"
-import { WysiwygEditor } from "@sidi-eyel/wysiwyg-editor"
-import "@sidi-eyel/wysiwyg-editor/styles"
+import { WysiwygEditor } from "@sidieyel/wysiwyg-editor"
+import "@sidieyel/wysiwyg-editor/styles"
 
 function App() {
   const [html, setHtml] = useState("<p>Hello world</p>")
@@ -50,7 +50,7 @@ function App() {
 }
 ```
 
-The stylesheet import (`@sidi-eyel/wysiwyg-editor/styles`) is required once per app. `@sidi-eyel/wysiwyg-editor/style.css` works too if your bundler prefers an explicit extension.
+The stylesheet import (`@sidieyel/wysiwyg-editor/styles`) is required once per app. `@sidieyel/wysiwyg-editor/style.css` works too if your bundler prefers an explicit extension.
 
 ## Props
 
@@ -146,8 +146,8 @@ The component ships with `"use client"` and defers rendering to the client (`imm
 // app/editor/page.tsx
 "use client"
 
-import { WysiwygEditor } from "@sidi-eyel/wysiwyg-editor"
-import "@sidi-eyel/wysiwyg-editor/styles"
+import { WysiwygEditor } from "@sidieyel/wysiwyg-editor"
+import "@sidieyel/wysiwyg-editor/styles"
 
 export default function Page() {
   return <WysiwygEditor placeholder="Write your post..." />
@@ -160,7 +160,7 @@ export default function Page() {
 
 ```tsx
 import { useRef } from "react"
-import { WysiwygEditor, type Editor } from "@sidi-eyel/wysiwyg-editor"
+import { WysiwygEditor, type Editor } from "@sidieyel/wysiwyg-editor"
 
 function MyForm() {
   const editorRef = useRef<Editor | null>(null)
