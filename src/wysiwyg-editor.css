@@ -55,6 +55,14 @@
   outline: none;
 }
 
+.wysiwyg-editor-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
 .wysiwyg-editor-content h1 {
   font-size: 2em;
   font-weight: bold;
