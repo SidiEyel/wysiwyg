@@ -1,6 +1,6 @@
 {
   "name": "@sidieyel/wysiwyg-editor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A modern WYSIWYG editor built with React and Tiptap",
   "type": "module",
   "main": "./dist/wysiwyg-editor.cjs",
@@ -25,6 +25,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b",
+    "test": "vitest run",
+    "example": "vite --config examples/review-queue/vite.config.ts",
+    "example:build": "vite build --config examples/review-queue/vite.config.ts",
     "preview": "vite preview",
     "prepublishOnly": "npm run build"
   },
@@ -33,6 +36,7 @@
     "wysiwyg",
     "editor",
     "rich-text",
+    "rtl",
     "tiptap",
     "text-editor",
     "react-component"
@@ -58,10 +62,10 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@tiptap/extension-text-align": "^3.7.2",
-    "@tiptap/extensions": "^3.7.2",
-    "@tiptap/react": "^3.7.2",
-    "@tiptap/starter-kit": "^3.7.2",
+    "@tiptap/extension-text-align": "^3.11.0",
+    "@tiptap/extensions": "^3.11.0",
+    "@tiptap/react": "^3.11.0",
+    "@tiptap/starter-kit": "^3.11.0",
     "lucide-react": "^0.454.0"
   },
   "devDependencies": {
@@ -73,6 +77,7 @@
     "react-dom": "^19.2.0",
     "typescript": "^5.7.3",
     "vite": "^7.1.12",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^5.0.3"
   }
 }

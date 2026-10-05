@@ -13,6 +13,7 @@ A modern, lightweight WYSIWYG editor component for React, built on [Tiptap](http
 - **Lists** — bullet and numbered
 - **Blocks** — blockquote, code block, horizontal rule
 - **Text alignment** — left, center, right
+- **Right-to-left text** — Arabic, Hebrew and mixed-direction content with the `dir` prop
 - **Links** — add, edit, and remove hyperlinks with URL normalization
 - **Undo / redo** — full history support
 - **Configurable toolbar** — show only the button groups you need, or none
@@ -65,6 +66,7 @@ The stylesheet import (`@sidieyel/wysiwyg-editor/styles`) is required once per a
 | `minHeight` | `number \| string` | `200` | Minimum height of the writing area (`number` = px). |
 | `maxHeight` | `number \| string` | — | Maximum height; content scrolls beyond it. |
 | `className` | `string` | `""` | Extra class names for the outer wrapper. |
+| `dir` | `"ltr" \| "rtl" \| "auto"` | — | Text direction of the content. Omit it to inherit the direction of the page. |
 | `onReady` | `(editor: Editor) => void` | — | Receives the underlying Tiptap `Editor` instance. |
 
 ### Toolbar groups
@@ -138,6 +140,18 @@ Render previously saved HTML with the same typography, no editing chrome:
 <WysiwygEditor content={savedHtml} editable={false} />
 ```
 
+### Right-to-left content
+
+Set `dir` to the direction of the content. The toolbar keeps following the direction of your page, so an Arabic document can be edited inside an English interface and the other way round:
+
+```tsx
+<WysiwygEditor content={arabicHtml} dir="rtl" />
+```
+
+`dir="auto"` detects the direction of each block from its first strong character. Prefer an explicit direction when you know the language: Arabic copy often starts with a Latin brand name, which `auto` reads as left-to-right.
+
+The direction is part of the output (`<p dir="rtl">…</p>`), so the HTML renders correctly wherever you display it.
+
 ### Next.js (App Router)
 
 The component ships with `"use client"` and defers rendering to the client (`immediatelyRender: false`), so it works in the App Router without wrappers:
@@ -176,13 +190,27 @@ function MyForm() {
 }
 ```
 
+## Example: review queue
+
+[`examples/review-queue`](./examples/review-queue) is a small app built on the editor: an approval queue for AI-written drafts in English, French and Arabic, with language-aware checks and one-click fixes.
+
+**[Open the live demo](https://sidieyel.github.io/wysiwyg/)**
+
+![Review queue showing an Arabic email draft with its checks](./examples/review-queue/screenshot.png)
+
+```bash
+npm run example    # http://localhost:5173
+```
+
 ## Development
 
 ```bash
 git clone https://github.com/SidiEyel/wysiwyg.git
 cd wysiwyg
 npm install
-npm run dev        # demo app at http://localhost:5173
+npm run dev        # playground at http://localhost:5173
+npm run example    # review queue example
+npm test           # unit tests
 npm run build      # typecheck + build library to dist/
 ```
 

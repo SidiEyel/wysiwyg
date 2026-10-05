@@ -82,6 +82,7 @@
 .wysiwyg-editor-content p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
+  float: inline-start;
   height: 0;
   color: var(--wysiwyg-muted);
   pointer-events: none;
@@ -111,7 +112,7 @@
 
 .wysiwyg-editor-content ul,
 .wysiwyg-editor-content ol {
-  padding-left: 2em;
+  padding-inline-start: 2em;
   margin: 1em 0;
 }
 
@@ -120,9 +121,9 @@
 }
 
 .wysiwyg-editor-content blockquote {
-  border-left: 3px solid var(--wysiwyg-border);
+  border-inline-start: 3px solid var(--wysiwyg-border);
   margin: 1em 0;
-  padding-left: 1em;
+  padding-inline-start: 1em;
   color: var(--wysiwyg-muted);
 }
 
