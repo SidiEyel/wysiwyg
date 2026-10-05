@@ -14,12 +14,13 @@ function App() {
   const [preset, setPreset] = useState<keyof typeof PRESETS>("Full")
   const [dark, setDark] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
+  const [dir, setDir] = useState<"" | "ltr" | "rtl" | "auto">("")
 
   return (
     <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", fontFamily: "system-ui, sans-serif" }}>
       <h1>WYSIWYG Editor Demo</h1>
       <p style={{ color: "#666", marginBottom: "1.5rem" }}>
-        Try the toolbar presets, dark theme, and read-only mode.
+        Try the toolbar presets, text direction, dark theme, and read-only mode.
       </p>
 
       <div style={{ display: "flex", gap: "1.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
@@ -29,6 +30,15 @@ function App() {
             {Object.keys(PRESETS).map((name) => (
               <option key={name}>{name}</option>
             ))}
+          </select>
+        </label>
+        <label>
+          Direction:{" "}
+          <select value={dir} onChange={(e) => setDir(e.target.value as typeof dir)}>
+            <option value="">Inherit</option>
+            <option value="ltr">LTR</option>
+            <option value="rtl">RTL</option>
+            <option value="auto">Auto</option>
           </select>
         </label>
         <label>
@@ -45,6 +55,7 @@ function App() {
         placeholder="Type something..."
         toolbar={PRESETS[preset]}
         editable={!readOnly}
+        dir={dir || undefined}
         minHeight={220}
         maxHeight="50vh"
         className={dark ? "demo-dark" : ""}

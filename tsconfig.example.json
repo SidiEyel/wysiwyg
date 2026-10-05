@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.example.tsbuildinfo",
+    /* The example imports the package by name; resolve it to the local source. */
+    "paths": {
+      "@sidieyel/wysiwyg-editor": ["./src/index.ts"]
+    }
+  },
+  "include": ["examples/review-queue/src"]
+}

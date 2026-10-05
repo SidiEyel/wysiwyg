@@ -67,6 +67,13 @@ export interface WysiwygEditorProps {
   minHeight?: number | string
   /** Maximum height of the writing area; overflow scrolls. */
   maxHeight?: number | string
+  /**
+   * Text direction of the content. `"ltr"` / `"rtl"` set it explicitly,
+   * `"auto"` detects it per block from the first strong character. The `dir`
+   * attribute is written to the output HTML. When omitted, the editor inherits
+   * the direction of the page.
+   */
+  dir?: "ltr" | "rtl" | "auto"
   /** Receives the Tiptap editor instance for advanced control. */
   onReady?: (editor: Editor) => void
 }
@@ -108,6 +115,7 @@ export function WysiwygEditor({
   autofocus = false,
   minHeight,
   maxHeight,
+  dir,
   onReady,
 }: WysiwygEditorProps) {
   const editor = useEditor({
@@ -129,6 +137,9 @@ export function WysiwygEditor({
     content,
     editable,
     autofocus,
+    // Written to every block as a `dir` attribute. Tiptap reads this once,
+    // when it builds the schema, hence the `[dir]` dependency below.
+    textDirection: dir,
     // Required for SSR frameworks (e.g. Next.js): render on the client only.
     immediatelyRender: false,
     // v3 defaults to not rerendering on transactions; the toolbar's active
@@ -145,7 +156,7 @@ export function WysiwygEditor({
         class: "wysiwyg-editor-content",
       },
     },
-  })
+  }, [dir])
 
   // Keep the editor in sync when the `content` prop changes from outside.
   useEffect(() => {
@@ -154,7 +165,8 @@ export function WysiwygEditor({
   }, [content, editor])
 
   useEffect(() => {
-    editor?.setEditable(editable)
+    // `false`: toggling read-only is not a content change, so no `onChange`.
+    editor?.setEditable(editable, false)
   }, [editor, editable])
 
   if (!editor) {

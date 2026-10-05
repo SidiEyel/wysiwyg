@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0 — 2026-10-05
+
+- New `dir` prop (`"ltr"`, `"rtl"` or `"auto"`) for right-to-left and
+  mixed-direction content. The direction is written to the output HTML as
+  `dir` attributes, so it survives wherever the HTML is rendered
+- Styles use CSS logical properties: lists, blockquotes and the placeholder
+  follow the text direction
+- Fixed: `onChange` no longer fires on mount or when `editable` changes
+- Requires Tiptap 3.11 or later
+- New example app in `examples/review-queue`: a review queue for AI-written
+  drafts in English, French and Arabic
+
 ## 1.0.0 — 2026-08-11
 
 First public release.
